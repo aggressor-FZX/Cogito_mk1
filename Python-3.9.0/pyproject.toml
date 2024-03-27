@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "cogito"
+version = "0"
+description = "openai dependicny"
+authors = ["Jeff Calderon <jeff.d.calderon@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.9"
+openai = "^1.14.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

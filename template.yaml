@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: "Cogito_mk1\nSample SAM Template for Cogito_mk1\n\n  Tracing: Active\n\
+  \  # You can add LoggingConfig parameters such as the Logformat, Log Group, and\
+  \ SystemLogLevel or ApplicationLogLevel. Learn more here https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-loggingconfig.\n\
+  \  LoggingConfig:\n    LogFormat: JSON\nApi:\n  TracingEnabled: true\n"
+Resources:
+  prompter:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: Cogito_root/
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Timeout: 10
+      Architectures:
+      - x86_64
+    Metadata:
+      SamResourceId: prompter 
+  imageScan:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: Cogito_root/
+      Handler: imageScan.lambda_handler
+      Runtime: python3.9
+      Architectures:
+      - x86_64
+      Events:
+        ImageScanApiEvent:
+          Type: Api 
+          Properties:
+            Path: /imageScan
+            Method: get

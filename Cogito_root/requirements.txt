@@ -1,0 +1,4 @@
+requests
+openai==1.0.0
+boto3
+PIllow==8.3.2
