@@ -20,8 +20,10 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: Cogito_root/
-      Handler: imageScan.lambda_handler
+      Handler: imageScan_Lambda.lambda_handler
       Runtime: python3.9
+      Timeout: 300
+      MemorySize: 1024
       Architectures:
       - x86_64
       Events:

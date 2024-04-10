@@ -5,7 +5,7 @@ codeuri = "/home/kali/Cogito_mk1/Cogito_mk1/Cogito_root"
 runtime = "python3.9"
 architecture = "x86_64"
 handler = "app.lambda_handler"
-manifest_hash = "564013fdaada87c7f21cc8fcfd0172dd"
+manifest_hash = "9af85489b893f96b1423fc2d10c407b3"
 packagetype = "Zip"
 functions = ["prompter", "imageScan"]
 

@@ -7,11 +7,28 @@
         {
             "type": "aws-sam",
             "request": "direct-invoke",
-            "name": "Cogito_mk1:prompter",
+            "name": "Invoke Lambda",
+            "invokeTarget": {
+                "target": "code",
+                "lambdaHandler": "lambda_handler",
+                "projectRoot": "${workspaceFolder}"
+            },
+            "lambda": {
+                "runtime": "python3.9",
+                "payload": {
+                    "json": {}
+                },
+                "memoryMb": 512
+            }
+        },
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "Cogito_mk1:imageScan",
             "invokeTarget": {
                 "target": "template",
                 "templatePath": "${workspaceFolder}/template.yaml",
-                "logicalId": "prompter"
+                "logicalId": "imageScan"
             },
             "lambda": {
                 "payload":{ 
@@ -19,7 +36,8 @@
                         "text": "Hello, client! what is the weather like today in seattle?"
                     }
                 },
-                "environmentVariables": {}
+                "environmentVariables": {},
+                "memoryMb": 512
             }
         },
         {
@@ -28,7 +46,7 @@
             "name": "Invoke Lambda",
             "invokeTarget": {
                 "target": "code",
-                "lambdaHandler": "app.lambda_handler",
+                "lambdaHandler": "imageScan.lambda_handler",
                 "projectRoot": "${workspaceFolder}"
             },
             "lambda": {
@@ -37,7 +55,8 @@
                     "json": {
                         "text": "Hello, client! what is the weather like today in seattle?"
                     }
-                }
+                },
+                "memoryMb": 512
             }
         },
         {
@@ -50,7 +69,7 @@
             },
             "pathMappings": [
                 {
-                    "localRoot": "${workspaceFolder}/hellow_world",
+                    "localRoot": "${workspaceFolder}/Cogito_root",
                     "remoteRoot": "."
                 }
             ]
