@@ -7,16 +7,16 @@
         {
             "type": "aws-sam",
             "request": "direct-invoke",
-            "name": "Invoke Lambda",
+            "name": "Invoke Lambda1",
             "invokeTarget": {
-                "target": "code",
-                "lambdaHandler": "lambda_handler",
-                "projectRoot": "${workspaceFolder}"
+                "target": "template",
+                "templatePath": "${workspaceFolder}/template.yaml",
+                "logicalId": "prompter"
             },
             "lambda": {
                 "runtime": "python3.9",
                 "payload": {
-                    "json": {}
+                    "path": "${workspaceFolder}/my_event.json",
                 },
                 "memoryMb": 512
             }
@@ -58,21 +58,6 @@
                 },
                 "memoryMb": 512
             }
-        },
-        {
-            "name": "Python Debugger: Remote Attach",
-            "type": "debugpy",
-            "request": "attach",
-            "connect": {
-                "host": "localhost",
-                "port": 5678
-            },
-            "pathMappings": [
-                {
-                    "localRoot": "${workspaceFolder}/Cogito_root",
-                    "remoteRoot": "."
-                }
-            ]
         }
     ]
 }

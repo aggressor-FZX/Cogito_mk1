@@ -3,6 +3,8 @@ import Ext.openai as openai
 import os
 import Ext.boto3 as boto3
 
+AWS_BUCKET = "aws-sam-cli-managed-default-samclisourcebucket-ipgxtoe8d3vw"
+
 def get_secret():
     secret_name = "openai"
     region_name = "us-east-1"
@@ -21,19 +23,23 @@ def get_secret():
     return get_secret_value_response['SecretString']
 
 def lambda_handler(event, context):
-    # Remove unnecessary print statement
-    # openai.api_key = get_secret(
+    
     key = json.loads(get_secret()).get("OPENAI_KEY")
     client = openai.OpenAI(api_key=key)
                            
-    print("event is: {}".format(event), "/n")
+    s3 = boto3.client('s3')
+    #print("event is: {}".format(event), "/n")
+
     paramsys = {"role": "system", "content": "you are a helpful assistant"}
     param_user = {"role": "user", "content": event['text']}
     mod = "gpt-3.5-turbo"
+    max_tok = 2000
+    response = client.chat.completions.create(messages=[paramsys,param_user], model=mod, max_tokens=max_tok, stop=None, temperature=0.7, top_p=1 )
 
-    response = client.chat.completions.create(messages=[paramsys,param_user], model=mod)
-    # Fix syntax error in print statement
-    print("response is: {}".format(response))
+    output_stream = response.choices[0].message.content
+    s3.put_object(Bucket=AWS_BUCKET, Key='Job_response.txt', Body=output_stream)
+
+#    print("response is: {}".format(response))
     return {
         'statusCode': 200,
         'body': response.choices[0].message.content

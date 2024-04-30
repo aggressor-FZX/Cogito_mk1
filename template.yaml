@@ -11,7 +11,8 @@ Resources:
       CodeUri: Cogito_root/
       Handler: app.lambda_handler
       Runtime: python3.9
-      Timeout: 10
+      Timeout: 300
+      MemorySize: 1024 
       Architectures:
       - x86_64
     Metadata:
