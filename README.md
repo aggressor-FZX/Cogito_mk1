@@ -1,6 +1,5 @@
 # Cogito_mk1
-The first Cogito build. 
-
+The first Cogito AWS Lambda build. 
 This is an AWS application made to run in the VS code enviornment. It uses a Docker image to reproduce the AWS enviornment for running locally and testing functionality. It requires a AWS profile and an S3 bucket. Two lambda functios were created here for test. Eventually they will be envokeed by another aws service which can be accesses from the internet. 
 
 I have app.py lambda function readinging in a file my_even.json which openAI responds to. At the time of this writing it creates a resume for me. This was done for testing. I gave it a large file of information about me and other with a job posting. It works well, but I will have the same question sent to different chat versions for comparisons. 
