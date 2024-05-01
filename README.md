@@ -1,28 +1,47 @@
 # Cogito_mk1
+The first Cogito AWS Lambda build. This is an AWS application made to run in the VS code enviornment. It uses a Docker image to reproduce the AWS enviornment for running locally and testing functionality. It requires a AWS profile and an S3 bucket. Two lambda functions were created here for test. Eventually they will be envokeed by another aws service which can be accesses from the internet.
 
-This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
+I have app.py lambda function readinging in a file my_even.json which openAI responds to. At the time of this writing it creates a resume for me. This was done for testing. I gave it a large file of information about me and other with a job posting. It works well, but I will have the same question sent to different chat versions for comparisons.
 
-- hello_world - Code for the application's Lambda function.
-- events - Invocation events that you can use to invoke the function.
-- tests - Unit tests for the application code. 
-- template.yaml - A template that defines the application's AWS resources.
+The other lambda imageScan_lambda takes an image and answers questions about it. It will be used to summerize text pdf books. I want it to tell me what the chapters are and the important points of each chapter. This file needes to be turned into a byte stream for openAI vision preview to work. Haven't had much luck with this as the size limit "message window" prevents me from sending proper text books.
 
-The application uses several AWS resources, including Lambda functions and an API Gateway API. These resources are defined in the `template.yaml` file in this project. You can update the template to add AWS resources through the same deployment process that updates your application code.
+Example Resume output:
 
-If you prefer to use an integrated development environment (IDE) to build and test your application, you can use the AWS Toolkit.  
-The AWS Toolkit is an open source plug-in for popular IDEs that uses the SAM CLI to build and deploy serverless applications on AWS. The AWS Toolkit also adds a simplified step-through debugging experience for Lambda function code. See the following links to get started.
+Jeff Calderon
 
-* [CLion](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [GoLand](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [IntelliJ](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [WebStorm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [Rider](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [PhpStorm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [PyCharm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [RubyMine](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [DataGrip](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [VS Code](https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/welcome.html)
-* [Visual Studio](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/welcome.html)
+Professional Summary: Research Physicist with 3 years of experience in performing studies related to radiation detection units for border and law enforcement. Skilled in presenting results from computer models and statistical analysis to validate software. Effective officer with technical problem-solving skills and proficiency in Python tools development for hydrographic data processing. Experienced Aerospace Equipment Mechanic with analytical ability to interpret schematics, diagrams, and technical documents. Excellent communicator with expertise in modern computing practices such as Python, Linux, AWS, C++, Docker, and network security.
+
+Experience: National Oceanic & Atmospheric Administration (NOAA) - Commissioned Officer - Jan 2016 - May 2023
+
+Acquired hydrographic data for the Office of Coast Survey, utilizing GIS software and Python-based automations for data processing.
+Configured the Science Computing System and managed sensor connections for data analysis and system validation.
+Implemented Python programming for shipboard problem-solving and workflow automation initiatives using Smartsheet.
+Praxis, Inc. - Research Physicist - Jan 2014 - Jan 2016
+
+Conducted studies on radiation detection units, presenting results to validate software and secure funding.
+Supported simulations to predict active interrogation procedures and passive detection of WMD/radiological devices.
+Led the transformation of technical information into digestible formats for non-physicists and facilitated communication.
+University of Maryland - Faculty Assistant Researcher - Jan 2013 - Apr 2015
+
+Designed software for data analysis and publication quality plots in particle physics experiments.
+Co-authored publications on experiments conducted at the Large Hadron Collider, contributing to scientific knowledge.
+Developed simulations for calorimetry studies and efficiency quantifications with programming skills in C++ and ROOT.
+United States Air Force - Aerospace Ground Equipment Mechanic - May 2002 - Jan 2010
+
+Administered equipment databases, supervised maintenance operations, and ensured aircraft data availability.
+Maintained aircraft maintenance records supporting F-16 fighter jets and presented readiness statistics to base leadership.
+Education & Certifications:
+
+Bachelor of Science in Professional Physics, University of Maryland
+Cyber Security Analyst Certificate, Everett Community College
+Digital Forensics, SCADA, Network Defense, Ethical Hacking
+AWS, C++, Python, Linux, Cloud Computing, Network Security
+Skills:
+
+Python, C++, Linux, AWS, Docker, Network Security, Git, REST APIs, Version Control
+Analytical thinking, growth mindset, strong interpersonal and communication skills
+Proficient in Microsoft Office, sonar acquisition hardware/software, and AWS Lambda
+LinkedIn: linkedin.com/in/jeffdcalderon Contact: jeff.d.calderon@gmail.com
 
 ## Deploy the sample application
 
@@ -41,11 +60,7 @@ sam build --use-container
 sam deploy --guided
 ```
 
-The first command will build the source of your application. The second command will package and deploy your application to AWS, with a series of prompts:
 
-* **Stack Name**: The name of the stack to deploy to CloudFormation. This should be unique to your account and region, and a good starting point would be something matching your project name.
-* **AWS Region**: The AWS region you want to deploy your app to.
-* **Confirm changes before deploy**: If set to yes, any change sets will be shown to you before execution for manual review. If set to no, the AWS SAM CLI will automatically deploy application changes.
 * **Allow SAM CLI IAM role creation**: Many AWS SAM templates, including this example, create AWS IAM roles required for the AWS Lambda function(s) included to access AWS services. By default, these are scoped down to minimum required permissions. To deploy an AWS CloudFormation stack which creates or modifies IAM roles, the `CAPABILITY_IAM` value for `capabilities` must be provided. If permission isn't provided through this prompt, to deploy this example you must explicitly pass `--capabilities CAPABILITY_IAM` to the `sam deploy` command.
 * **Save arguments to samconfig.toml**: If set to yes, your choices will be saved to a configuration file inside the project, so that in the future you can just re-run `sam deploy` without parameters to deploy changes to your application.
 
