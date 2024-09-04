@@ -49,4 +49,4 @@ Skills:
 - Proficient in Microsoft Office, sonar acquisition hardware/software, and AWS Lambda
 
 LinkedIn: linkedin.com/in/jeffdcalderon
-Contact: jeff.d.calderon@gmail.com
+Contact: j**@gmail.com
