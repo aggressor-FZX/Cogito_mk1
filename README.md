@@ -1,4 +1,5 @@
 # Cogito_mk1
+# Everything is on the Master Branch!
 The first Cogito AWS Lambda build. 
 This is an AWS application made to run in the VS code enviornment. It uses a Docker image to reproduce the AWS enviornment for running locally and testing functionality. It requires a AWS profile and an S3 bucket. Two lambda functions were created here for test. Eventually they will be envokeed by another aws service which can be accesses from the internet. 
 
