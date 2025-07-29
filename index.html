@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Cogito Career Coach</h2>
+<p>Enter the job ad and your experiences to get a resume prompt.</p>
+
+<form id="myForm">
+  <label for="jobAd" style="font-size: 40px;">Job Ad:</label><br>
+  <textarea id="jobAd" name="jobAd" rows="10"cols="50"></textarea><br>
+  <label for="myExperiences" style="font-size: 40px;">My Experiences:</label><br>
+  <textarea id="myExperiences" name="myExperiences"name="myExperiences" rows="10"cols="50"></textarea><br>
+  <input type="submit" value="Help Me Cogito" style="font-size: 40px; padding: 20px;">
+</form>
+
+<div id="response"></div>
+<script>
+document.getElementById("myForm").addEventListener("submit", function(event){
+  event.preventDefault()
+
+  var jobAd = document.getElementById("jobAd").value;
+  var myExperiences = document.getElementById("myExperiences").value;
+
+  var combinedInput ="using ths job ad \"" + jobAd +"\" and my experiences \"" + myExperiences + "\"";
+  var instructions = "Please write a resume for this job. It needs to begin with an proffossional summary, which includes a title for me.The title should market myself for the job I am applying to. This should have 2 to 5 discripters  such as detail-oriented or self motivated. The rest shuld hate a few sentences which highlights my knowledge tech skills and expertise relevent to the job announcment."
+  var payload = combinedInput + instructions;
+  fetch('https://azsnyqrqm5.execute-api.us-east-1.amazonaws.com/Prod/prompter', {
+    method: 'POST',
+    body: JSON.stringify({text: payload}), 
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(response => {
+    return response.json()
+  }).then(data => {
+    console.log(data)
+    document.getElementById('response').innerText = data.body;
+  }).catch((error) => {
+    console.error('Error:', error)
+  });
+});
+</script>
+
+</body>
+</html>
